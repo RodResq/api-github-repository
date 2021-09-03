@@ -20,3 +20,22 @@ function searchProjects(projectName) {
 				.then(itemsList => { projectList.next(itemsList) })
 		})
 }
+
+projectList.subscribe(projects => {
+	var template = '';
+	projects.forEach(project => {
+		template += `
+			<li class="project-list-item">
+				<img class="project-owner-avatar" src="${project.owner.avatar_url}">
+				<div class="project-info">
+					<b>${project.owner.login}</b>
+					/ ${project.name}
+				</div>
+				<div class="project-info">
+					Forks: ${project.forks}
+				</div>
+			</li>
+		`;
+	})
+	myDiv.innerHTML = `<ul class="project-list">${template}</ul>`
+})
